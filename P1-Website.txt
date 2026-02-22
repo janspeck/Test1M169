@@ -1,0 +1,44 @@
+1. Docker Interaktiv ausführen
+docker run -it ubuntu
+
+2. portweiterleitung
+docker run -p 5000:80 nginx
+
+3. Volume namen geben
+docker run -d --Name containername -v myvolume:/var/lib/mysql mariadb
+
+4. Volume an einem bestimmten ort abspeichern
+docker run -d --Name containername -v /home/vmadmin/database:/var/lib/myql mariadb
+
+5. Netzwerke anzeigen
+docker network ls
+
+6. Netzwerkeinistellungen
+docker network inspect bidge
+
+7. Netzwerk erstellen
+
+docker network create \
+--driver=bridge \
+--subnet=10.10.10.0/24 \
+--gateway=10.10.10.1 \
+my_net
+
+8. Contianer erstellen und Netzwerk zuweisen
+docker run -it --Name containername --network=my_net ubuntu:latest
+
+9. Bestehenden container Netzwerk zuweisen
+aus default Netzwerk rausnehmen: docker network disconnect bridge containername
+dann dem Netzwerk zuweisen: docker network connect mynet containername
+
+10. Container administrieren:
+
+Platzbedarf: docker system df
+Container löschen: docker rm containerID
+image löschen: docker rmi imagename
+volumes anzeigen: docker volume ls
+volume löschen: docker volume rm volumename
+Gesamtüberblick: docker ps -a
+Images anzeigen: docker images
+Netzwerk anzeigen: docker network ls
+Nicht verwendete Container, Netzwerk und Images löschen: docker system prune
